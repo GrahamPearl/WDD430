@@ -17,11 +17,11 @@
     <div class="panel-body">
       <div class="row">
         <label>Email: </label>
-        <p>{{contact._email}}</p>
+        <p *ngIf="(contact | json) != '{}'"> {{contact._email}}</p>
       </div>
       <div class="row">
         <label>Phone: </label>
-        <p>{{contact._phone}}</p>
+        <p *ngIf="(contact | json) != '{}'">{{contact._phone}}</p>
       </div>
     </div>
   </div>
