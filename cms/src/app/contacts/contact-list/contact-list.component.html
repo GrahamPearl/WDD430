@@ -12,7 +12,7 @@
     </div>
     <div class="panel-body" *ngFor="let one_contact of contacts">
       
-        <cms-contact-item [contact]="one_contact"></cms-contact-item>
+        <cms-contact-item [contact]="one_contact" (click)="onSelected(one_contact)"></cms-contact-item>
       
     </div>
   </div>
