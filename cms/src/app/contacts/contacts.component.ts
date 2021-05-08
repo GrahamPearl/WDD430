@@ -6,6 +6,7 @@ import { Contact } from './contact.model';
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.css']
 })
+
 export class ContactsComponent implements OnInit {
   @Input() selectedContact! : Contact; 
 
