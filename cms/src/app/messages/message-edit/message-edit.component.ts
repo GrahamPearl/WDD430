@@ -8,7 +8,7 @@ import { Message } from '../message.model';
 })
 export class MessageEditComponent implements OnInit {
   @ViewChild('subject', {static: true}) ref_subject!: ElementRef;
-  @ViewChild('msgText', {static: true}) ref_msgText!: ElementRef;  
+  @ViewChild('message', {static: true}) ref_msgText!: ElementRef;  
   @Output() addMessageEvent = new EventEmitter<Message>();
   currentSender : string = "Graham Pearl";
 
@@ -24,8 +24,8 @@ export class MessageEditComponent implements OnInit {
   }
 
   onSendMessage() {
-    let the_subject = this.ref_subject.nativeElement.value;
-    let the_msgText = this.ref_msgText.nativeElement.value; 
+    let the_subject = (String)(this.ref_subject.nativeElement.value);
+    let the_msgText = (String)(this.ref_msgText.nativeElement.value); 
     
     this.addMessageEvent.emit(new Message('1', ''+the_subject, ''+the_msgText,this.currentSender));
   }
