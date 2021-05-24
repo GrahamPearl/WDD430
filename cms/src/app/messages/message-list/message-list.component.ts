@@ -1,28 +1,25 @@
 import { Component, EventEmitter, Input, OnInit, ViewChild } from '@angular/core';
 import { Message } from '../message.model';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'cms-message-list',
   templateUrl: './message-list.component.html',
-  styleUrls: ['./message-list.component.css']
+  styleUrls: ['./message-list.component.css'],
+  providers: [ MessageService ]
 })
 export class MessageListComponent implements OnInit {
   @Input('sent_message') element!: Message;
 
-  messages: Message[] = [
-    new Message('1', 'Testing 1', 'Testing to confirm that a message is displayed', 'Pearl G.'),
-    new Message('2', 'Testing 2', 'Testing to confirm that a message is displayed', 'Pearl G.'),
-    new Message('3', 'Testing 3', 'Testing to confirm that a message is displayed', 'Pearl G.'),
-  ];
+  messages: Message[] = [];
 
-  constructor() { }
+  constructor(private messageService : MessageService) { }
 
   ngOnInit(): void {
+    this.messages = this.messageService.getMessages();
   }
 
-  onAddMessage(message: Message) {
-    //console.log("AddMessage - EventHandler");
-    //console.log("message recieved:"+message._msgText);
+  onAddMessage(message: Message) {    
     this.messages.push(message);
   }
 
