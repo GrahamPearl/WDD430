@@ -15,14 +15,11 @@ export class MessageItemComponent implements OnInit {
   message!: Message;
   messageSender!: String;
 
-  constructor(private contactService: ContactService) {
-    const contact: Contact | null = this.contactService.getContact(this.message.sender);    
-    if (contact === null)
-    {
-    } else this.messageSender = contact.name;    
-  }
-
-  ngOnInit(): void {
-  }
+  constructor(private contactService: ContactService) {}
+   ngOnInit() {
+      const contact: Contact | null = this.contactService.getContact(this.message.sender);
+      if (contact === null)
+      {} else this.messageSender = contact.name;
+   }
 
 }
