@@ -10,7 +10,8 @@ import { ContactService } from '../contact.service';
 })
 
 export class ContactListComponent implements OnInit {
-  @Output() selectedContactEvent = new EventEmitter<Contact>();
+// TO REMOVE
+  //@Output() selectedContactEvent = new EventEmitter<Contact>();
 
   contacts: Contact[] = [];
 
@@ -22,9 +23,8 @@ export class ContactListComponent implements OnInit {
   }
 
   onSelected(contact: Contact) {
-    this.selectedContactEvent.emit(contact);
+    alert("Contact-list item selected: "+contact.name);
+
+    this.contactService.contactSelectedEvent.emit(contact);
   }
-
-  
-
 }
