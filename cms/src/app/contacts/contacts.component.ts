@@ -10,6 +10,7 @@ import { ContactService } from './contact.service';
 })
 
 export class ContactsComponent implements OnInit {
+  @Input()
   selectedContact!: Contact;
 
   constructor(private contactService : ContactService) { }
