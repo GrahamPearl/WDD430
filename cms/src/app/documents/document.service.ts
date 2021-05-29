@@ -7,10 +7,10 @@ import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
   providedIn: 'root'
 })
 
-export class DocumentService {
-  
+export class DocumentService {  
   documents: Document[] = [];
   documentSelectedEvent = new EventEmitter<Document>();
+  documentChangedEvent = new EventEmitter<Document[]>();
 
   constructor() {
     this.documents = MOCKDOCUMENTS;
@@ -21,17 +21,30 @@ export class DocumentService {
   }
 
   getDocument(id: string): Document | null {
-    if (!this.documents) {
-      return null;
+    if (!document)
+    { return null;
     }
 
     for (let document of this.documents) {
-      /*if (document.url === id) {
+      if (document.id === id) {
         return document;
-      }
-      */
+      }      
     }
+
     return null;
+  }
+
+  deleteDocument(document : Document) {
+    if (!document)
+    { return;
+    }
+
+    const pos = this.documents.indexOf(document);
+    if (pos < 0)
+      return;
+
+    this.documents.splice(pos,1);
+    this.documentChangedEvent.emit(this.documents.slice());
   }
 
 }

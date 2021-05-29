@@ -17,11 +17,11 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit(): void {
     this.contacts = this.contactService.getContacts();
-  }
-
-  onSelected(contact: Contact) {
-    //alert("Contact-list item selected: "+contact.name);
-
-    this.contactService.contactSelectedEvent.emit(contact);
-  }
+    this.contactService.contactChangedEvent
+      .subscribe(
+        (contacts: Contact[]) => {
+          this.contacts = contacts;
+        }
+      );
+  }  
 }

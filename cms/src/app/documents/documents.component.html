@@ -4,8 +4,7 @@
     <cms-document-list></cms-document-list>
   </div>
 
-  <div class="col-md-4" *ngIf=selectedDocument>
-    <!--Add tag to load the DocumentDetailComponent here-->    
-    <cms-document-detail [document]=selectedDocument></cms-document-detail>
+  <div class="col-md-4" >
+    <router-outlet></router-outlet>
   </div>
 </div>

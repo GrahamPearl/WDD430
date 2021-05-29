@@ -17,11 +17,12 @@ export class DocumentListComponent implements OnInit {
   ngOnInit(): void {
     // TODO: Correct the documents definition
     this.documents = this.documentService.getDocuments();
-  }
-
-  onSelectedDocument(document: Document) {
-    //this.selectedDocumentEvent.emit(document);
-    this.documentService.documentSelectedEvent.emit(document);
+    this.documentService.documentChangedEvent
+      .subscribe(
+        (documents: Document[]) => {
+          this.documents = documents;
+        }
+      );
   }
 
 }
