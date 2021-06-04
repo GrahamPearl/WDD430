@@ -1,0 +1,19 @@
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-9">
+          <h3>Contacts</h3>
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-success pull-right" routerLink="new">New Contact</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body" *ngFor="let one_contact of contacts">
+
+      <cms-contact-item [contact]="one_contact"></cms-contact-item>
+      
+    </div>
+  </div>
+</div>
