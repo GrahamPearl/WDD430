@@ -71,9 +71,15 @@ export class ContactService {
       (newContact === undefined) || (newContact === null)) {
       return;
     } else {
-      const pos = originalContact.id;
-      this.contacts[parseInt(pos)] = newContact;
 
+      const pos = this.contacts.indexOf(originalContact);
+      if (pos < 0)
+      {
+        return;
+      }
+      newContact.id = originalContact.id
+      this.contacts[pos] = newContact;
+      
       let contactsListClone = this.contacts.slice();
       this.contactListChangedEvent.next(contactsListClone);
     }
