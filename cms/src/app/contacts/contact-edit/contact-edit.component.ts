@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
@@ -47,7 +48,7 @@ export class ContactEditComponent implements OnInit {
     this.groupContacts.push(selectedContact);
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
 
   }
 
