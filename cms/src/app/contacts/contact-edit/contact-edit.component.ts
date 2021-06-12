@@ -69,7 +69,17 @@ export class ContactEditComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-
+    let value = form.value;
+    let newContact = new Contact('',value['name'],value['email'],value['phone'],value['imageUrl'],null);
+    if (this.editMode)
+       {
+         if (this.originalContact !== null)
+         this.contactService.updateContact(this.originalContact,newContact);
+       } else
+       {
+         this.contactService.addcontact(newContact);
+       }
+       this.router.navigate(['\contacts']);
   }
 
   onCancel() {
