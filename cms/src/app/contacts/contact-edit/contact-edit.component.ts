@@ -10,7 +10,7 @@ import { ContactService } from '../contact.service';
   styleUrls: ['./contact-edit.component.css']
 })
 export class ContactEditComponent implements OnInit {
-  originalContact!: Contact;
+  originalContact!: Contact | null;
   contact!: Contact;
   groupContacts: Contact[] = [];
   editMode: boolean = false;
@@ -19,10 +19,30 @@ export class ContactEditComponent implements OnInit {
   constructor(
     private contactService: ContactService,
     private router: Router,
-    private route: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params
+    .subscribe(
+      (params: Params) => {
+        let foundID = params['id'];
+
+        if ((foundID === undefined) || (foundID === null)) {
+          this.editMode = false;
+          return;
+        }
+
+        this.originalContact = this.contactService.getContact(foundID);
+
+        if ((this.originalContact === undefined) || (this.originalContact === null)) {
+          return;
+        }
+
+        this.editMode = true;
+        this.contact = JSON.parse(JSON.stringify(this.originalContact));
+      }
+    );
   }
 
   isInvalidContact(newContact: Contact) {
@@ -53,7 +73,7 @@ export class ContactEditComponent implements OnInit {
   }
 
   onCancel() {
-
+    this.router.navigate(['\contacts']);
   }
 
   onRemoveItem(index: number) {
