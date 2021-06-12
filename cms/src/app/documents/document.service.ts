@@ -54,7 +54,7 @@ export class DocumentService {
   addDocument(newDocument: Document) {
     if ((newDocument === undefined) || (newDocument === null)) {
       return;
-    } else {
+    } else {      
       this.maxDocumentId++;
 
       newDocument.id = this.maxDocumentId.toString();
@@ -71,9 +71,14 @@ export class DocumentService {
       (newDocument === undefined) || (newDocument === null)) {
       return;
     } else {
-      const pos = originalDocument.id;
-      this.documents[parseInt(pos)] = newDocument;
-
+      const pos = this.documents.indexOf(originalDocument);
+      if (pos < 0)
+      {
+        return;
+      }
+      newDocument.id = originalDocument.id;
+      this.documents[pos] = newDocument;
+      
       let documentsListClone = this.documents.slice();
       this.documentListChangedEvent.next(documentsListClone);
     }
