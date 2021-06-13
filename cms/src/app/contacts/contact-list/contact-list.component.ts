@@ -1,7 +1,7 @@
 import { Component,  OnInit, OnDestroy } from '@angular/core';
 import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
-import { from, Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'cms-contact-list',
@@ -10,7 +10,6 @@ import { from, Observable, Subscription } from 'rxjs';
 })
 
 export class ContactListComponent implements OnInit, OnDestroy {
-  
   subscription : Subscription | undefined;
   contacts: Contact[] = [];
 
