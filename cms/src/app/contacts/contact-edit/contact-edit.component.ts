@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ValueTransformer } from '@angular/compiler/src/util';
+import { Component, KeyValueDiffers, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Contact } from '../contact.model';
@@ -63,10 +64,7 @@ export class ContactEditComponent implements OnInit {
     return false;
   }
 
-  addToGroup($event: any) {
-
-    alert("Drag and Drop - addToGroup Event activated!");
-
+  addToGroup($event: any) {    
     const selectedContact: Contact = $event.dragData;
     const invalidGroupContact = this.isInvalidContact(selectedContact);
     if (invalidGroupContact) {
@@ -75,14 +73,19 @@ export class ContactEditComponent implements OnInit {
     this.groupContacts.push(selectedContact);
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm) {    
     let value = form.value;
-    let newContact = new Contact('', value['name'], value['email'], value['phone'], value['imageUrl'], null);
+
+    value.group = JSON.parse(JSON.stringify(this.groupContacts));    
+    let newContact = new Contact(value['id'], value['name'], value['email'], value['phone'], value['imageUrl'], value['group']);
+
+    //console.log("Testing Group data:"+JSON.stringify(newContact.group));
+
     if (this.editMode) {
       if (this.originalContact !== null)
         this.contactService.updateContact(this.originalContact, newContact);
     } else {
-      this.contactService.addcontact(newContact);
+      this.contactService.addContact(newContact);
     }
     this.router.navigate(['\contacts']);
   }

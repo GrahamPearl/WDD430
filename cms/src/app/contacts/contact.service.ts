@@ -50,14 +50,14 @@ export class ContactService {
     return maxId
   }
 
-  addcontact(newcontact: Contact) {
-    if ((newcontact === undefined) || (newcontact === null)) {
+  addContact(newContact: Contact) {
+    if ((newContact === undefined) || (newContact === null)) {
       return;
     } else {
       this.maxContactId++;
 
-      newcontact.id = this.maxContactId.toString();    
-      this.contacts.push(newcontact);
+      newContact.id = this.maxContactId.toString();    
+      this.contacts.push(newContact);
 
       let contactsListClone = this.contacts.slice();
       this.contactListChangedEvent.next(contactsListClone);
