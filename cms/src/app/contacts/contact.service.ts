@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Contact } from './contact.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { Subject } from 'rxjs';
 
@@ -16,26 +17,61 @@ export class ContactService {
   maxContactId: number;
 
 
-  constructor() {
-    this.contacts = MOCKCONTACTS;
-    this.maxContactId = this.getMaxId();
+  constructor(private http: HttpClient) {
+    http.get<Contact[]>('https://pearlgwdd430-default-rtdb.firebaseio.com/contacts.json').subscribe(
+
+      (contacts: Contact[]) => {
+        this.contacts = contacts;
+        this.maxContactId = this.getMaxId();
+
+        this.contacts.sort(function (a, b) {
+          if (a.name < b.name) { return -1 }
+          else if (a.name > b.name) { return 1 }
+          else { return 0 }
+        });
+
+        let contactsListClone = this.contacts.slice();
+        this.contactListChangedEvent.next(contactsListClone);
+      }
+      ,
+      (error: any) => {
+        console.log(error);
+      }
+    );
+    //this.contacts = MOCKCONTACTS;
+    //this.maxContactId = this.getMaxId();
+  }
+
+  public storeContacts(contacts: Contact[]) {
+    
+    let data = JSON.stringify(this.contacts);
+    let httpHeader: HttpHeaders = new HttpHeaders();
+    httpHeader.set('Content-Type', 'application/json');
+    
+    this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/contacts.json', data, {'headers': httpHeader })
+      .subscribe(() => {
+        let contactsListClone = this.contacts.slice();
+        this.contactListChangedEvent.next(contactsListClone);
+      }
+      );      
   }
 
   public getContacts(): Contact[] {
     return this.contacts.slice();
   }
 
-  getContact(id: string) : Contact | null {
+
+  getContact(id: string): Contact | null {
     if (!this.contacts) {
       return null;
     }
-    
+
     for (let contact of this.contacts) {
       if (contact.id === id) {
         return contact;
-      } 
+      }
     }
-    return null;    
+    return null;
   }
 
   getMaxId(): number {
@@ -56,11 +92,12 @@ export class ContactService {
     } else {
       this.maxContactId++;
 
-      newContact.id = this.maxContactId.toString();    
+      newContact.id = this.maxContactId.toString();
       this.contacts.push(newContact);
 
       let contactsListClone = this.contacts.slice();
-      this.contactListChangedEvent.next(contactsListClone);
+      //this.contactListChangedEvent.next(contactsListClone);
+      this.storeContacts(contactsListClone);
     }
   }
 
@@ -72,15 +109,15 @@ export class ContactService {
     } else {
 
       const pos = this.contacts.indexOf(originalContact);
-      if (pos < 0)
-      {
+      if (pos < 0) {
         return;
       }
       newContact.id = originalContact.id
       this.contacts[pos] = newContact;
-      
+
       let contactsListClone = this.contacts.slice();
-      this.contactListChangedEvent.next(contactsListClone);
+      //this.contactListChangedEvent.next(contactsListClone);
+      this.storeContacts(contactsListClone);
     }
   }
 
@@ -95,6 +132,7 @@ export class ContactService {
 
     this.contacts.splice(pos, 1);
     let contactsListClone = this.contacts.slice();
-    this.contactListChangedEvent.next(contactsListClone);
+    //this.contactListChangedEvent.next(contactsListClone);
+    this.storeContacts(contactsListClone);
   }
 }
