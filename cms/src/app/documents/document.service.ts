@@ -18,7 +18,7 @@ export class DocumentService {
 
   constructor(private http: HttpClient, private documentService: DocumentService) {
     /*
-
+    
     http.get<Document[]>('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json').subscribe(
 
       (documents: Document[]) => {
@@ -46,19 +46,19 @@ export class DocumentService {
   }
 
   public storeDocuments(documents: Document[]) {
+    /*
     let data = JSON.stringify(this.documents);
     let httpHeader: HttpHeaders = new HttpHeaders();
     httpHeader.set('Content-Type', 'application/json');
-
-    //http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/pearlgwdd430-default-rtdb.json',documents)
+    
     this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/posts.json', data)
       .subscribe(() => {
         let documentsListClone = this.documents.slice();
         this.documentListChangedEvent.next(documentsListClone);
       }
       );
-
-    //http.
+   
+    */
   }
 
   public getDocuments(): Document[] {
