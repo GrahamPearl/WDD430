@@ -37,8 +37,9 @@
         <div class="form-group">
           <label for="groupList">Group Contacts:</label>
 
-          <div class="row" id="groupList" style="min-height: 3rem;" dnd-droppable [dropZones]="['contactGroup']"
-            (onDropSuccess)="addToGroup($event)">
+          <div class="row" id="groupList" 
+            style="min-height: 3rem;" 
+            dnd-droppable [dropZones]="['contactGroup']" (onDropSuccess)="addToGroup($event)">
 
             <div *ngFor="let contact of groupContacts; let i = index">
               <div>
@@ -47,7 +48,7 @@
               </div>
             </div>
             <span class="dragMsg" *ngIf="groupContacts?.length < 1">Drag contacts in group here</span>
-            <!--<span class="dragMsg">Drag contacts in group here</span> : use this if strict compiler is enforced-->
+            <!--<span class="dragMsg">Drag contacts in group here</span> -->
           </div>
 
         </div>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
-import { from, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,7 @@ export class ContactService {
   contacts: Contact[] = [];
   contactSelectedEvent = new EventEmitter<Contact>();
   contactChangedEvent = new EventEmitter<Contact[]>();
-  contactListChangedEvent = new EventEmitter<Contact[]>();
-  Subject: Contact[] = [];
+  contactListChangedEvent = new Subject<Contact[]>();
   maxContactId: number;
 
 
@@ -51,14 +50,14 @@ export class ContactService {
     return maxId
   }
 
-  addcontact(newcontact: Contact) {
-    if ((newcontact === undefined) || (newcontact === null)) {
+  addContact(newContact: Contact) {
+    if ((newContact === undefined) || (newContact === null)) {
       return;
     } else {
       this.maxContactId++;
 
-      newcontact.id = this.maxContactId.toString();    
-      this.contacts.push(newcontact);
+      newContact.id = this.maxContactId.toString();    
+      this.contacts.push(newContact);
 
       let contactsListClone = this.contacts.slice();
       this.contactListChangedEvent.next(contactsListClone);

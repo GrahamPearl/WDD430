@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ValueTransformer } from '@angular/compiler/src/util';
+import { Component, KeyValueDiffers, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Contact } from '../contact.model';
@@ -6,7 +7,7 @@ import { ContactService } from '../contact.service';
 
 @Component({
   selector: 'cms-contact-edit',
-  templateUrl: './contact-edit.component.html',  
+  templateUrl: './contact-edit.component.html',
   styleUrls: ['./contact-edit.component.css']
 })
 export class ContactEditComponent implements OnInit {
@@ -24,30 +25,29 @@ export class ContactEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params
-    .subscribe(
-      (params: Params) => {
-        let foundID = params['id'];
+      .subscribe(
+        (params: Params) => {
+          let foundID = params['id'];
 
-        if ((foundID === undefined) || (foundID === null)) {
-          this.editMode = false;
-          return;
+          if ((foundID === undefined) || (foundID === null)) {
+            this.editMode = false;
+            return;
+          }
+
+          this.originalContact = this.contactService.getContact(foundID);
+
+          if ((this.originalContact === undefined) || (this.originalContact === null)) {
+            return;
+          }
+
+          this.editMode = true;
+          this.contact = JSON.parse(JSON.stringify(this.originalContact));
+
+          if (this.originalContact.group) {
+            this.groupContacts = JSON.parse(JSON.stringify(this.originalContact.group));
+          }
         }
-
-        this.originalContact = this.contactService.getContact(foundID);
-
-        if ((this.originalContact === undefined) || (this.originalContact === null)) {
-          return;
-        }
-
-        this.editMode = true;
-        this.contact = JSON.parse(JSON.stringify(this.originalContact));
-
-        if (this.originalContact.group)
-        {
-          this.groupContacts = JSON.parse(JSON.stringify(this.originalContact.group));
-        }
-      }
-    );
+      );
   }
 
   isInvalidContact(newContact: Contact) {
@@ -56,18 +56,15 @@ export class ContactEditComponent implements OnInit {
     } if (this.contact && newContact.id === this.contact.id) {
       return true;
     }
-    for(const contact of this.groupContacts) {
+    for (const contact of this.groupContacts) {
       if (newContact.id === contact.id) {
         return true;
       }
-    }    
+    }
     return false;
   }
 
-  addToGroup($event: any) {
-    
-    alert("Drag and Drop- addToGroup Event activated!");
-
+  addToGroup($event: any) {    
     const selectedContact: Contact = $event.dragData;
     const invalidGroupContact = this.isInvalidContact(selectedContact);
     if (invalidGroupContact) {
@@ -76,18 +73,21 @@ export class ContactEditComponent implements OnInit {
     this.groupContacts.push(selectedContact);
   }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm) {    
     let value = form.value;
-    let newContact = new Contact('',value['name'],value['email'],value['phone'],value['imageUrl'],null);
-    if (this.editMode)
-       {
-         if (this.originalContact !== null)
-         this.contactService.updateContact(this.originalContact,newContact);
-       } else
-       {
-         this.contactService.addcontact(newContact);
-       }
-       this.router.navigate(['\contacts']);
+
+    value.group = JSON.parse(JSON.stringify(this.groupContacts));    
+    let newContact = new Contact(value['id'], value['name'], value['email'], value['phone'], value['imageUrl'], value['group']);
+
+    //console.log("Testing Group data:"+JSON.stringify(newContact.group));
+
+    if (this.editMode) {
+      if (this.originalContact !== null)
+        this.contactService.updateContact(this.originalContact, newContact);
+    } else {
+      this.contactService.addContact(newContact);
+    }
+    this.router.navigate(['\contacts']);
   }
 
   onCancel() {
