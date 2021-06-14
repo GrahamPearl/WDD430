@@ -16,8 +16,8 @@ export class DocumentService {
   documentListChangedEvent = new Subject<Document[]>();
   maxDocumentId: number;
 
-  constructor(private http: HttpClient, private documentService: DocumentService) {
-    /*
+  constructor(private http: HttpClient) {
+    
     
     http.get<Document[]>('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json').subscribe(
 
@@ -39,10 +39,10 @@ export class DocumentService {
         console.log(error);
       }
     );
-    */
+    /**/
     // Code used prior to week 9
-    this.documents = MOCKDOCUMENTS;
-    this.maxDocumentId = this.getMaxId();
+    //this.documents = MOCKDOCUMENTS;
+    //this.maxDocumentId = this.getMaxId();
   }
 
   public storeDocuments(documents: Document[]) {
