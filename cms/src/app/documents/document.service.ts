@@ -46,19 +46,17 @@ export class DocumentService {
   }
 
   public storeDocuments(documents: Document[]) {
-    /*
+    
     let data = JSON.stringify(this.documents);
     let httpHeader: HttpHeaders = new HttpHeaders();
     httpHeader.set('Content-Type', 'application/json');
     
-    this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/posts.json', data)
+    this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json', data, {'headers': httpHeader })
       .subscribe(() => {
         let documentsListClone = this.documents.slice();
         this.documentListChangedEvent.next(documentsListClone);
       }
-      );
-   
-    */
+      );      
   }
 
   public getDocuments(): Document[] {
@@ -101,8 +99,8 @@ export class DocumentService {
       this.documents.push(newDocument);
 
       let documentsListClone = this.documents.slice();
-      this.documentListChangedEvent.next(documentsListClone);
-      //this.storeDocuments(documentsListClone);
+      //this.documentListChangedEvent.next(documentsListClone);
+      this.storeDocuments(documentsListClone);
     }
   }
 
@@ -120,8 +118,8 @@ export class DocumentService {
       this.documents[pos] = newDocument;
 
       let documentsListClone = this.documents.slice();
-      this.documentListChangedEvent.next(documentsListClone);
-      //this.storeDocuments(documentsListClone);
+      //this.documentListChangedEvent.next(documentsListClone);
+      this.storeDocuments(documentsListClone);
     }
   }
 
@@ -136,8 +134,8 @@ export class DocumentService {
 
     this.documents.splice(pos, 1);
     let documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
-    //this.storeDocuments(documentsListClone);
+    //this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocuments(documentsListClone);
   }
 
 }
