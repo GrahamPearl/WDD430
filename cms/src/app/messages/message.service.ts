@@ -45,7 +45,7 @@ export class MessageService {
     let httpHeader: HttpHeaders = new HttpHeaders();
     httpHeader.set('Content-Type', 'application/json');
     
-    this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/Messages.json', data, {'headers': httpHeader })
+    this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/messages.json', data, {'headers': httpHeader })
       .subscribe(() => {
         let messagesListClone = this.messages.slice();
         this.messageListChangedEvent.next(messagesListClone);
