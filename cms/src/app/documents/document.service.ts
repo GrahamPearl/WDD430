@@ -17,9 +17,9 @@ export class DocumentService {
   maxDocumentId: number;
 
   constructor(private http: HttpClient) {
-        
+
     //http.get<Document[]>('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json').subscribe(
-      http.get<Document[]>('http://localhost:3000/documents').subscribe(      
+    http.get<Document[]>('http://localhost:3000/documents').subscribe(
       (documents: Document[]) => {
         this.documents = documents;
         this.maxDocumentId = this.getMaxId();
@@ -45,24 +45,24 @@ export class DocumentService {
   }
 
   public storeDocuments(documents: Document[]) {
-    
+
     let data = JSON.stringify(this.documents);
     let httpHeader: HttpHeaders = new HttpHeaders();
     httpHeader.set('Content-Type', 'application/json');
-    
-    this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json', data, {'headers': httpHeader })
+
+    this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json', data, { 'headers': httpHeader })
       .subscribe(() => {
         let documentsListClone = this.documents.slice();
         this.documentListChangedEvent.next(documentsListClone);
       }
-      );      
+      );
   }
 
   public getDocuments(): Document[] {
     return this.documents.slice();
   }
 
-  getDocument(id: string): Document | null {
+  public getDocument(id: string): Document | null {
     if (!document) {
       return null;
     }
@@ -76,7 +76,7 @@ export class DocumentService {
     return null;
   }
 
-  getMaxId(): number {
+  public getMaxId(): number {
 
     let maxId = 0
 
@@ -88,20 +88,20 @@ export class DocumentService {
     return maxId
   }
 
-  addDocument(document: Document) {
-   /* if ((newDocument === undefined) || (newDocument === null)) {
-      return;
-    } else {
-      this.maxDocumentId++;
-
-      newDocument.id = this.maxDocumentId.toString();
-      this.documents.push(newDocument);
-
-      let documentsListClone = this.documents.slice();
-      //this.documentListChangedEvent.next(documentsListClone);
-      this.storeDocuments(documentsListClone);
-    }
-    */
+  public addDocument(document: Document) {
+    /* if ((newDocument === undefined) || (newDocument === null)) {
+       return;
+     } else {
+       this.maxDocumentId++;
+ 
+       newDocument.id = this.maxDocumentId.toString();
+       this.documents.push(newDocument);
+ 
+       let documentsListClone = this.documents.slice();
+       //this.documentListChangedEvent.next(documentsListClone);
+       this.storeDocuments(documentsListClone);
+     }
+     */
     if (!document) {
       return;
     }
@@ -109,7 +109,7 @@ export class DocumentService {
     // make sure id of the new Document is empty
     document.id = '';
 
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // add to database
     this.http.post<{ message: string, document: Document }>('http://localhost:3000/documents',
@@ -124,7 +124,7 @@ export class DocumentService {
       );
   }
 
-  updateDocument(originalDocument: Document, newDocument: Document) {
+  public updateDocument(originalDocument: Document, newDocument: Document) {
     /*
     if
       ((originalDocument === undefined) || (originalDocument === null) ||
@@ -157,7 +157,7 @@ export class DocumentService {
     newDocument.id = originalDocument.id;
     //newDocument._id = originalDocument._id;
 
-    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // update database
     this.http.put('http://localhost:3000/documents/' + originalDocument.id,
@@ -169,9 +169,8 @@ export class DocumentService {
         }
       );
   }
-  }
 
-  deleteDocument(document: Document) {
+  public deleteDocument(document: Document) {
     if ((document === undefined) || ((document === null))) {
       return;
     }
