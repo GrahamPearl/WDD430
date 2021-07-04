@@ -18,7 +18,7 @@ export class DocumentService {
 
   constructor(private http: HttpClient) {
 
-    //http.get<Document[]>('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json').subscribe(
+   // http.get<Document[]>('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json').subscribe(
     http.get<Document[]>('http://localhost:3000/documents').subscribe(
       (documents: Document[]) => {
         this.documents = documents;
@@ -49,8 +49,9 @@ export class DocumentService {
     let data = JSON.stringify(this.documents);
     let httpHeader: HttpHeaders = new HttpHeaders();
     httpHeader.set('Content-Type', 'application/json');
-
-    this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json', data, { 'headers': httpHeader })
+    
+    //this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json', data, { 'headers': httpHeader })
+    this.http.put('http://localhost:3000/documents', data, { 'headers': httpHeader })
       .subscribe(() => {
         let documentsListClone = this.documents.slice();
         this.documentListChangedEvent.next(documentsListClone);
@@ -59,7 +60,7 @@ export class DocumentService {
   }
 
   public getDocuments(): Document[] {
-    return this.documents.slice();
+    return this.documents;
   }
 
   public getDocument(id: string): Document | null {
@@ -89,19 +90,6 @@ export class DocumentService {
   }
 
   public addDocument(document: Document) {
-    /* if ((newDocument === undefined) || (newDocument === null)) {
-       return;
-     } else {
-       this.maxDocumentId++;
- 
-       newDocument.id = this.maxDocumentId.toString();
-       this.documents.push(newDocument);
- 
-       let documentsListClone = this.documents.slice();
-       //this.documentListChangedEvent.next(documentsListClone);
-       this.storeDocuments(documentsListClone);
-     }
-     */
     if (!document) {
       return;
     }
@@ -119,7 +107,9 @@ export class DocumentService {
         (responseData) => {
           // add new document to documents
           this.documents.push(responseData.document);
-          //this.sortAndSend();
+          
+          let documentsListClone = this.documents.slice();       
+          this.storeDocuments(documentsListClone);
         }
       );
   }

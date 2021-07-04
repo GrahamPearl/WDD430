@@ -8,14 +8,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 // import the routing file to handle the default (index) route
-var index = require('./server/routes/app');
+var index = require('./routes/app');
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ... 
-const messageRoutes = require('/server/routes/messages');
-const contactRoutes = require('/server/routes/contacts');
-const documentsRoutes = require('/server/routes/documents');
+const messageRoutes = require('./routes/messages');
+const contactRoutes = require('./routes/contacts');
+const documentsRoutes = require('./routes/documents');
 
 // establish a connection to the mongo database
+
 mongoose.connect('mongodb://localhost:27017/cms',
   { useNewUrlParser: true }, (err, res) => {
     console.log('Attempting connection... ');
