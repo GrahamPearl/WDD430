@@ -1,4 +1,5 @@
 // Get dependencies
+var mongoose = require('mongoose');
 var express = require('express');
 var path = require('path');
 var http = require('http');
@@ -13,6 +14,19 @@ var index = require('./server/routes/app');
 const messageRoutes = require('/server/routes/messages');
 const contactRoutes = require('/server/routes/contacts');
 const documentsRoutes = require('/server/routes/documents');
+
+// establish a connection to the mongo database
+mongoose.connect('mongodb://localhost:27017/cms',
+  { useNewUrlParser: true }, (err, res) => {
+    console.log('Attempting connection... ');
+    if (err) {
+      console.log('Connection failed: ' + err);
+    }
+    else {
+      console.log('Connected to database!');
+    }
+  }
+);
 
 var app = express(); // create an instance of express
 
@@ -64,6 +78,6 @@ app.set('port', port);
 const server = http.createServer(app);
 
 // Tell the server to start listening on the provided port
-server.listen(port, function() {
+server.listen(port, function () {
   console.log('API running on localhost: ' + port)
 });
