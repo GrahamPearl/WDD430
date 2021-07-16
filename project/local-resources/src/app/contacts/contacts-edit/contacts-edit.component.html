@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+      <form id="contact-edit">
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" class="form-control required" size="120" max="120" name="name">
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email" class="form-control required" size="120" max="255"
+              name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,3}$" >
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" class="form-control invalid" size="150" max="255" 
+              name="phone" pattern="\D*([2-9]\d{2})(\D*)([2-9]\d{2})(\D*)(\d{4})\D*">
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label for="imageUrl">Image URL:</label>
+            <input type="text" id="imageUrl" class="form-control" size="150" max="255" 
+              name="imageUrl">
+          </div>
+        </div>
+                  
+        <div class="row">
+          <div class="col-xs-12 btn-toolbar">
+            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-primary" type="button">Cancel</button>
+          </div>
+        </div>
+  
+      </form>
+    </div>
+  </div>

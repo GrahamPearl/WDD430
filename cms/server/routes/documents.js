@@ -8,7 +8,7 @@ module.exports = router;
 router.get('/', (req, res, next) => {
     //call the Document model find() method to get all ... in the collection
     Document.find()
-        .then(document => {
+        .exec(document => {
             res.status(200).json({
                 message: 'Documents fetched successfully!',
                 documents: documents
