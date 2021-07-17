@@ -3,48 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Listable } from './listable';
 
-export abstract class AbstractDataService<ModelDataType extends Listable> {
-  private items: ModelDataType[] = [];
+export abstract class AbstractDataService<T extends Listable> {
+  private items: T[] = [];
   private maxId = 0;
-  itemSelectedEvent = new EventEmitter<ModelDataType>();
-  itemChangedEvent = new EventEmitter<ModelDataType[]>();
-  listChangedEvent = new Subject<ModelDataType[]>();
+  itemSelectedEvent = new EventEmitter<T>();
+  itemChangedEvent = new EventEmitter<T[]>();
+  listChangedEvent = new Subject<T[]>();
   url!: string;
-  //http!: HttpClient;
-
-  constructor(private http: HttpClient, url: string) {
-    this.http = http;
-    this.url = url;
-
-    http.get<ModelDataType[]>(url).subscribe(
-
-      (items: ModelDataType[]) => {
-        this.items = items;
-        this.maxId = this.getMaxId();
-
-        let itemsListClone = this.items.slice();
-        this.itemChangedEvent.next(itemsListClone);
-      }
-      ,
-      (error: any) => {
-        console.log(error);
-      }
-    );
-  }
-
-  public storeContacts(items: ModelDataType[]) {
-
-    let data = JSON.stringify(this.items);
-    let httpHeader: HttpHeaders = new HttpHeaders();
-    httpHeader.set('Content-Type', 'application/json');
-
-    this.http.put(this.url, data, { 'headers': httpHeader })
-      .subscribe(() => {
-        let itemsListClone = this.items.slice();
-        this.listChangedEvent.next(itemsListClone);
-      }
-      );
-  }
 
   getMaxId(): number {
     let maxId = 0;
@@ -57,11 +22,11 @@ export abstract class AbstractDataService<ModelDataType extends Listable> {
     return maxId;
   }
 
-  getItems(): ModelDataType[] {
+  public getItems(): T[] {
     return this.items.slice();
   }
 
-  getItem(id: string): ModelDataType | null {
+  public getItem(id: string): T | null {
     for (const element of this.items) {
       if (element.id === id)
         return element;
@@ -69,7 +34,12 @@ export abstract class AbstractDataService<ModelDataType extends Listable> {
     return null;
   }
 
-  deleteItem(item: ModelDataType) {
+  public setItems(items: T[]) {
+    this.items = items;
+    this.maxId = this.getMaxId();
+  }
+
+  public deleteItem(item: T) {
     if (!item) {
       return;
     }
@@ -81,7 +51,7 @@ export abstract class AbstractDataService<ModelDataType extends Listable> {
     this.listChangedEvent.next(this.items.slice());
   }
 
-  addItem(newItem: ModelDataType): void {
+  public addItem(newItem: T): void {
     if (!newItem) {
       return;
     }
@@ -91,7 +61,7 @@ export abstract class AbstractDataService<ModelDataType extends Listable> {
     this.listChangedEvent.next(this.items.slice());
   }
 
-  updateItem(originalItem: ModelDataType, newItem: ModelDataType) {
+  public updateItem(originalItem: T, newItem: T) {
     if (!originalItem || !newItem) {
       return;
     }

@@ -11,6 +11,16 @@
       </div>
     </div>
 
+    <div class="container">
+      <div class="row">
+        <label for="search-term">Search For:</label>
+        <input type="text" #searchBox="" id="search-term" class="form-control" size="120" max="120"
+          (keyup)="search(searchBox.value)" placeholder="Enter a search value">
+
+        <div class="glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
+      </div>              
+    </div>
+
     <div class="card-group">
       <div class="center-panel" *ngFor="let item of items">
         <app-videos-item [video]="item"></app-videos-item>

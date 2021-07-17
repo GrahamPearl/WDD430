@@ -1,4 +1,4 @@
-import { AbstractDetailsComponent } from '../../listable/abstract-details-component'
+import { AbstractDetailsComponent } from '../../listable/abstract-details-component-from-seed'
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { WindRefService } from '../../../wind-ref.service';
@@ -19,7 +19,7 @@ export class ResourcesDetailsComponent extends AbstractDetailsComponent<Resource
     activatedRoute: ActivatedRoute,
     windRefService: WindRefService
   ) {
-    super(itemService, router, activatedRoute, windRefService);
+    super(itemService, router, activatedRoute, windRefService); //
     this.redirect = '\resources';
   }
 

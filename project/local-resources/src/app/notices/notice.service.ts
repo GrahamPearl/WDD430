@@ -8,8 +8,9 @@ import { Injectable } from '@angular/core';
 })
 
 export class NoticeService extends AbstractDataServiceFromSeed<Notice> {
-  seedData(): Notice[] {
-    return MOCKITEMS;
+  constructor() {
+    super();
+    super.setItems(MOCKITEMS);
   }
 }
 

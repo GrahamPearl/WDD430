@@ -8,7 +8,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ResourceService extends AbstractDataServiceFromSeed<Resource> {
-  seedData(): Resource[] {
-    return MOCKITEMS;
+  constructor() {
+    super();
+    super.setItems(MOCKITEMS);
   }
 }

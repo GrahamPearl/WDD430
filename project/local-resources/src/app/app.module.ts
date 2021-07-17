@@ -34,10 +34,13 @@ import { VideosDetailsComponent } from './videos/videos-details/videos-details.c
 import { VideosEditComponent } from './videos/videos-edit/videos-edit.component';
 import { VideosItemComponent } from './videos/videos-item/videos-item.component';
 import { VideosListComponent } from './videos/videos-list/videos-list.component';
+import { VideoFilterPipe } from './videos/video-filter.pipe';
+
 import { ResourcesDetailsComponent } from './resources/resources-details/resources-details.component';
 import { ResourcesItemComponent } from './resources/resources-item/resources-item.component';
 import { ResourcesEditComponent } from './resources/resources-edit/resources-edit.component';
 import { ResourcesListComponent } from './resources/resources-list/resources-list.component';
+import { ResourceFilterPipe } from './resources/resource-filter.pipe';
 
 
 @NgModule({
@@ -56,23 +59,29 @@ import { ResourcesListComponent } from './resources/resources-list/resources-lis
     ContactsEditComponent,
     ContactsItemComponent,
     ContactsDetailsComponent,
-    
+    ContactsFilterPipe,
+
     VideosDetailsComponent,
     VideosEditComponent,
     VideosItemComponent,
     VideosListComponent,
-    ContactsFilterPipe,
+    VideoFilterPipe,
+
     MapsComponent,
     HomeComponent,
     SignupComponent,
+
     NoticesListComponent,
     NoticesDetailsComponent,
     NoticesEditComponent,
     NoticesItemComponent,
+
     ResourcesDetailsComponent,
     ResourcesItemComponent,
     ResourcesEditComponent,
-    ResourcesListComponent
+    ResourcesListComponent,
+    ResourceFilterPipe
+    
   ],
   imports: [
     AppRoutingModule,

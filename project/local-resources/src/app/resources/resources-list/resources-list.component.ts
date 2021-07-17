@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class ResourcesListComponent implements OnInit {
   subscription : Subscription | undefined;
   items: Resource[] = [];
+  term!: string;
   
   constructor(private aService : ResourceService) { }
 
@@ -29,6 +30,14 @@ export class ResourcesListComponent implements OnInit {
           this.items = itemList;
         }
       );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+
+  search(value: String) {
+    this.term = value.toString();
   }
 
 }

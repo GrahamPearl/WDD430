@@ -1,3 +1,5 @@
+import { AbstractDetailsComponent } from '../../listable/abstract-details-component-from-http'
+import { WindRefService } from '../../../wind-ref.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Contact } from '../contact.model';
@@ -8,31 +10,20 @@ import { ContactService } from '../contact.service';
   templateUrl: './contacts-details.component.html',
   styleUrls: ['./contacts-details.component.css']
 })
-export class ContactsDetailsComponent implements OnInit {
-  contact!: Contact;
+
+//
+
+export class ContactsDetailsComponent extends AbstractDetailsComponent<Contact>{
+  redirect: string;
 
   constructor(
-    private contactService: ContactService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) { }
-
-  ngOnInit(): void {
-    this.activatedRoute.params
-      .subscribe(
-        (params: Params) => {
-          let foundID: string;
-          foundID = params['id'];
-          let contactFound: Contact | null = this.contactService.getItem(foundID);
-          if (contactFound !== null)
-            this.contact = contactFound;
-        }
-      );
-  }
-
-  onDelete() {
-    this.contactService.deleteItem(this.contact);
-    this.router.navigate(['\contacts']);
+    itemService: ContactService,
+    router: Router,
+    activatedRoute: ActivatedRoute
+  )
+  {
+    super(itemService, router, activatedRoute);
+    this.redirect = '\resources';
   }
 
 }

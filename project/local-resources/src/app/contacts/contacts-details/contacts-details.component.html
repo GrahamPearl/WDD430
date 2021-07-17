@@ -3,8 +3,8 @@
     <div class="panel-heading">
       <div class="row">
         <div class="col-md-7">
-          <h3>{{contact.name}}</h3>
-          <img src="{{contact.imageUrl}}">
+          <h3>{{item.name}}</h3>
+          <img src="{{item.imageUrl}}">
         </div>
         <div class="col-md-5">
           <div class="row">
@@ -17,11 +17,11 @@
     <div class="panel-body">
       <div class="row">
         <label>Email: </label>
-        <p *ngIf="(contact | json) != '{}'"> {{contact.email}}</p>
+        <p *ngIf="(item | json) != '{}'"> {{item.email}}</p>
       </div>
       <div class="row">
         <label>Phone: </label>
-        <p *ngIf="(contact | json) != '{}'">{{contact.phone}}</p>
+        <p *ngIf="(item | json) != '{}'">{{item.phone}}</p>
       </div>
     </div>
   </div>

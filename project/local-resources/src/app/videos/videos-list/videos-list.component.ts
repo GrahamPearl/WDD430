@@ -12,6 +12,7 @@ export class VideosListComponent implements OnInit {
 
   subscription : Subscription | undefined;
   items: Video[] = [];
+  term!: string;
   
   constructor(private aService : VideoService) { }
 
@@ -30,5 +31,13 @@ export class VideosListComponent implements OnInit {
           this.items = itemList;
         }
       );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+
+  search(value: String) {
+    this.term = value.toString();
   }
 }

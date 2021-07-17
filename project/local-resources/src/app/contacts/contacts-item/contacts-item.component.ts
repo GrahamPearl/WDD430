@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 
 export class ContactsItemComponent implements OnInit {
   @Input()
-  contact!: Contact;
+  item!: Contact;
   subscription! : Subscription;
 
   constructor() { }

@@ -8,7 +8,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class VideoService extends AbstractDataServiceFromSeed<Video> {
-  seedData(): Video[] {
-    return MOCKITEMS;
+
+  constructor() {
+    super();
+    super.setItems(MOCKITEMS);
   }
 }

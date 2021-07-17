@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WindRefService } from '../../../wind-ref.service';
-import { AbstractDetailsComponent } from '../../listable/abstract-details-component';
+import { AbstractDetailsComponent } from '../../listable/abstract-details-component-from-seed';
 
 import { Video } from '../video.model';
 import { VideoService } from '../video.service';
@@ -21,9 +21,12 @@ export class VideosDetailsComponent extends AbstractDetailsComponent<Video> {
     activatedRoute: ActivatedRoute,
     windRefService: WindRefService
   ) {
-    super(itemService, router, activatedRoute, windRefService);
+    super(itemService, router, activatedRoute, windRefService); //
     this.redirect = '\videos';
   }
 
-
+  onView(): void {
+    let gotoUrl = 'https://www.youtube.com/embed/'+this.item.videoUrl;
+    this.nativeWindow.open(gotoUrl);
+  }
 }
