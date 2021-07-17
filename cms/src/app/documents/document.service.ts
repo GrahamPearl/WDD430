@@ -23,6 +23,7 @@ export class DocumentService {
       });
     */
     http.get<{ message: string; documents: Document[] }>('http://localhost:3000/documents').subscribe(response => {
+      console.log(response.message);
       this.setDocument(response.documents);
     });
   }

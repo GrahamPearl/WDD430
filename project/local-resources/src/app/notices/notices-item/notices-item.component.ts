@@ -8,7 +8,7 @@ import { Notice } from '../notice.model';
 })
 export class NoticesItemComponent implements OnInit {
   @Input()
-  notice!: Notice;
+  item!: Notice;
   constructor() { }
 
   ngOnInit(): void {

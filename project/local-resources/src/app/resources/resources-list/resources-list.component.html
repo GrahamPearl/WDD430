@@ -1,1 +1,23 @@
 <p>resources-list works!</p>
+<div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-md-9">
+            <h3>Resources</h3>
+          </div>
+          <div class="col-md-3">
+            <button class="btn btn-success pull-right">New Resource</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-group">
+      <div class="center-panel" *ngFor="let item of items">
+        <app-resources-item [item]="item"></app-resources-item>
+      </div>
+    </div>
+
+    </div>
+  </div>
+  

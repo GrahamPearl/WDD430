@@ -4,12 +4,12 @@ import { WindRefService } from '../../../wind-ref.service';
 import { Notice } from '../notice.model';
 import { NoticeService } from '../notice.service';
 
-
 @Component({
   selector: 'app-notices-details',
   templateUrl: './notices-details.component.html',
   styleUrls: ['./notices-details.component.css']
 })
+
 export class NoticesDetailsComponent implements OnInit {
   nativeWindow: any;
   item!: Notice;

@@ -1,1 +1,8 @@
-<p>resources-item works!</p>
+<div class="card text-black mb-3" routerLinkActive="active-link" routerLink="{{item.id}}" style="width: 18rem;">    
+    <div class="card-body">
+        <h5 class="card-title">{{item.title}}</h5>
+        <p class="card-text">{{item.product}}</p>
+        <p class="card-text">Posted: {{item.dateOf}}</p>
+    </div>
+    <a href="/resources/{{item.id}}" class="btn btn-primary">View Details</a>
+</div>

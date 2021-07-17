@@ -10,7 +10,11 @@ import { NoticesEditComponent } from './notices/notices-edit/notices-edit.compon
 import { VideosComponent } from './videos/videos.component';
 import { VideosDetailsComponent } from './videos/videos-details/videos-details.component';
 import { VideosEditComponent } from './videos/videos-edit/videos-edit.component';
+
 import { ResourcesComponent } from './resources/resources.component';
+import { ResourcesDetailsComponent } from './resources/resources-details/resources-details.component';
+import { ResourcesEditComponent } from './resources/resources-edit/resources-edit.component';
+
 import { MapsComponent } from './maps/maps.component';
 
 import { ContactsComponent } from './contacts/contacts.component';
@@ -33,9 +37,9 @@ const appRoutes: Routes = [
   {
     path: 'resources', component: ResourcesComponent,
     children: [
-      { path: 'new', component: NoticesComponent },
-      { path: ':id', component: NoticesComponent },
-      { path: ':id/edit', component: NoticesComponent },
+      { path: 'new', component: ResourcesEditComponent },
+      { path: ':id', component: ResourcesDetailsComponent },
+      { path: ':id/edit', component: ResourcesEditComponent },
     ],
   },
   {

@@ -23,6 +23,7 @@ export class MessageService {
     */
 
     http.get<{ message: string; messages: Message[] }>('http://localhost:3000/messages').subscribe(response => {
+      console.log(response.message);
       this.setItems(response.messages);
     });    
   }

@@ -14,9 +14,7 @@ import { VideoService } from '../video.service';
 
 export class VideosDetailsComponent extends AbstractDetailsComponent<Video> {
   redirect: string;
- // nativeWindow: any;
- // item!: Video;
-
+ 
   constructor(
     itemService: VideoService,
     router: Router,
