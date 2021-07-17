@@ -11,9 +11,9 @@ var logger = require('morgan');
 var index = require('./server/routes/app');
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ... 
-const messageRoutes = require('/server/routes/messages');
-const contactRoutes = require('/server/routes/contacts');
-const documentsRoutes = require('/server/routes/documents');
+const messageRoutes = require('./server/routes/messages');
+const contactRoutes = require('./server/routes/contacts');
+const documentsRoutes = require('./server/routes/documents');
 
 // establish a connection to the mongo database
 

@@ -6,9 +6,8 @@ var router = express.Router();
 module.exports = router;
 
 router.get('/', (req, res, next) => {
-    //call the Document model find() method to get all ... in the collection
     Document.find()
-        .exec(document => {
+        .then(documents => {
             res.status(200).json({
                 message: 'Documents fetched successfully!',
                 documents: documents
@@ -16,7 +15,7 @@ router.get('/', (req, res, next) => {
         })
         .catch(error => {
             res.status(500).json({
-                message: 'An error occurred - unable to fetch documents from MongoDB',
+                message: 'An error occured',
                 error: error
             });
         });

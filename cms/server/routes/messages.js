@@ -8,7 +8,7 @@ module.exports = router;
 router.get('/', (req, res, next) => {
     //call the Message model find() method to get all ... in the collection
     Message.find({})
-        .then(message => {
+        .then(messages => {
             res.status(200).json({
                 message: 'Messages fetched successfully!',
                 messages: messages

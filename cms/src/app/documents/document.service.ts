@@ -17,31 +17,14 @@ export class DocumentService {
   maxDocumentId: number;
 
   constructor(private http: HttpClient) {
-
-   // http.get<Document[]>('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json').subscribe(
-    http.get<Document[]>('http://localhost:3000/documents').subscribe(
-      (documents: Document[]) => {
-        this.documents = documents;
-        this.maxDocumentId = this.getMaxId();
-
-        this.documents.sort(function (a, b) {
-          if (a.name < b.name) { return -1 }
-          else if (a.name > b.name) { return 1 }
-          else { return 0 }
-        });
-
-        let documentsListClone = this.documents.slice();
-        this.documentListChangedEvent.next(documentsListClone);
-      }
-      ,
-      (error: any) => {
-        console.log(error);
-      }
-    );
-    /**/
-    // Code used prior to week 9
-    //this.documents = MOCKDOCUMENTS;
-    //this.maxDocumentId = this.getMaxId();
+    /* OBTAINING DATA FROM FIREBASE
+    http.get<Document[]>('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json').subscribe((documents: Document[]) => {
+        this.setDocument(documents);
+      });
+    */
+    http.get<{ message: string; documents: Document[] }>('http://localhost:3000/documents').subscribe(response => {
+      this.setDocument(response.documents);
+    });
   }
 
   public storeDocuments(documents: Document[]) {
@@ -49,7 +32,7 @@ export class DocumentService {
     let data = JSON.stringify(this.documents);
     let httpHeader: HttpHeaders = new HttpHeaders();
     httpHeader.set('Content-Type', 'application/json');
-    
+
     //this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/documents.json', data, { 'headers': httpHeader })
     this.http.put('http://localhost:3000/documents', data, { 'headers': httpHeader })
       .subscribe(() => {
@@ -61,6 +44,24 @@ export class DocumentService {
 
   public getDocuments(): Document[] {
     return this.documents;
+  }
+
+  public setDocument(documents: Document[]) {
+    try {
+      this.documents = documents;
+      this.maxDocumentId = this.getMaxId();
+
+      this.documents.sort(function (a, b) {
+        if (a.name < b.name) { return -1 }
+        else if (a.name > b.name) { return 1 }
+        else { return 0 }
+      });
+
+      let documentsListClone = this.documents.slice();
+      this.documentListChangedEvent.next(documentsListClone);
+    } catch (error: any) {
+      console.log(error);
+    }
   }
 
   public getDocument(id: string): Document | null {
@@ -107,8 +108,8 @@ export class DocumentService {
         (responseData) => {
           // add new document to documents
           this.documents.push(responseData.document);
-          
-          let documentsListClone = this.documents.slice();       
+
+          let documentsListClone = this.documents.slice();
           this.storeDocuments(documentsListClone);
         }
       );

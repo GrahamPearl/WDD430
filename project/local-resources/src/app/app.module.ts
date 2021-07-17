@@ -34,6 +34,10 @@ import { VideosDetailsComponent } from './videos/videos-details/videos-details.c
 import { VideosEditComponent } from './videos/videos-edit/videos-edit.component';
 import { VideosItemComponent } from './videos/videos-item/videos-item.component';
 import { VideosListComponent } from './videos/videos-list/videos-list.component';
+import { ResourcesDetailsComponent } from './resources/resources-details/resources-details.component';
+import { ResourcesItemComponent } from './resources/resources-item/resources-item.component';
+import { ResourcesEditComponent } from './resources/resources-edit/resources-edit.component';
+import { ResourcesListComponent } from './resources/resources-list/resources-list.component';
 
 
 @NgModule({
@@ -64,7 +68,11 @@ import { VideosListComponent } from './videos/videos-list/videos-list.component'
     NoticesListComponent,
     NoticesDetailsComponent,
     NoticesEditComponent,
-    NoticesItemComponent
+    NoticesItemComponent,
+    ResourcesDetailsComponent,
+    ResourcesItemComponent,
+    ResourcesEditComponent,
+    ResourcesListComponent
   ],
   imports: [
     AppRoutingModule,

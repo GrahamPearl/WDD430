@@ -16,41 +16,46 @@ export class MessageService {
   maxMessageId: number;
 
   constructor(private http: HttpClient) {
-    //this.messages = MOCKMESSAGES;    
-    http.get<Message[]>('https://pearlgwdd430-default-rtdb.firebaseio.com/messages.json').subscribe(
+    /*
+    http.get<Message[]>('https://pearlgwdd430-default-rtdb.firebaseio.com/messages.json').subscribe((items: Message[]) => {
+      this.setItems(items);
+    });
+    */
 
-      (messages: Message[]) => {
-        this.messages = messages;
-        this.maxMessageId = this.getMaxID();
-
-        this.messages.sort(function (a, b) {
-          if (a.id < b.id) { return -1; }
-          else if (a.id > b.id) { return 1; }
-          else { return 0; }
-        });
-
-        let messagesListClone = this.messages.slice();
-        //this.messageListChangedEvent.next(messagesListClone);
-      },
-
-      (error: any) => {
-        console.log(error);
-      }
-    );
+    http.get<{ message: string; messages: Message[] }>('http://localhost:3000/messages').subscribe(response => {
+      this.setItems(response.messages);
+    });    
   }
 
-  public storeMessages(messages:Message[]) {
-    
+  public setItems(messages: Message[]) {
+    try {
+      this.messages = messages;
+      this.maxMessageId = this.getMaxID();
+
+      this.messages.sort(function (a, b) {
+        if (a.id < b.id) { return -1; }
+        else if (a.id > b.id) { return 1; }
+        else { return 0; }
+      });
+
+      let messagesListClone = this.messages.slice();
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
+  public storeMessages(messages: Message[]) {
+
     let data = JSON.stringify(this.messages);
     let httpHeader: HttpHeaders = new HttpHeaders();
     httpHeader.set('Content-Type', 'application/json');
-    
-    this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/messages.json', data, {'headers': httpHeader })
+
+    this.http.put('https://pearlgwdd430-default-rtdb.firebaseio.com/messages.json', data, { 'headers': httpHeader })
       .subscribe(() => {
         let messagesListClone = this.messages.slice();
         this.messageListChangedEvent.next(messagesListClone);
       }
-      );      
+      );
   }
 
   private getMaxID(): number {
