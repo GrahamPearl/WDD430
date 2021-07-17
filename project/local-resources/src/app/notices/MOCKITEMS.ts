@@ -8,6 +8,7 @@ export const MOCKITEMS: Notice[] = [
     message: 'It works!',
     type: 'bg-danger',
     dateOf: '2021/07/16',    
+    sender: null
   },
   // index 1
   {
@@ -16,6 +17,7 @@ export const MOCKITEMS: Notice[] = [
     message: 'It works!',
     type: 'bg-warning',
     dateOf: '2021/07/17',    
+    sender: null
   },
   // index 2
   {
@@ -24,5 +26,6 @@ export const MOCKITEMS: Notice[] = [
     message: 'It works!',
     type: 'bg-dark',
     dateOf: '2021/07/17',    
+    sender: null
   }  
 ];

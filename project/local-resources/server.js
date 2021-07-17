@@ -5,7 +5,7 @@ var express = require('express');
 
 var path = require('path');
 var http = require('http');
-/*
+
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
@@ -14,7 +14,7 @@ var index = require('./server/routes/app');
 const contactRoutes = require('/server/routes/contacts');
 const noticeRoutes = require('/server/routes/notices');
 const reesourceRoutes = require('/server/routes/resources');
-/
+
 mongoose.connect('mongodb://localhost:27017/local-resources',
   { useNewUrlParser: true }, (err, res) => {
     console.log('Attempting connection... ');
@@ -60,7 +60,7 @@ app.use('/notices', noticeRoutes);
 app.use('/resources', resourceRoutes);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/cms/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/local-resources/index.html'));
 });
 
 // Define the port address and tell express to use this port
@@ -71,4 +71,3 @@ const server = http.createServer(app);
 server.listen(port, function () {
   console.log('API running on localhost: ' + port)
 });
-*/

@@ -1,8 +1,8 @@
-<div class="card text-white {{notice.type}} mb-3" style="width: 18rem;">    
+<div class="card text-white {{notice.type}} mb-3" routerLinkActive="active-link" routerLink="{{notice.id}}" style="width: 18rem;">    
     <div class="card-body">
         <h5 class="card-title">{{notice.title}}</h5>
         <p class="card-text">{{notice.message}}</p>
         <p class="card-text">Posted: {{notice.dateOf}}</p>
     </div>
-    <a href="/notices" class="btn btn-primary">View Details</a>
+    <a href="/notices/{{notice.id}}" class="btn btn-primary">View Details</a>
 </div>

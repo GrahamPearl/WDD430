@@ -18,15 +18,15 @@ export class ContactsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.contacts = this.contactService.getContacts();
-    this.contactService.contactChangedEvent
+    this.contacts = this.contactService.getItems();
+    this.contactService.itemChangedEvent
       .subscribe(
         (contacts: Contact[]) => {
           this.contacts = contacts;
         }
       );
 
-      this.subscription = this.contactService.contactListChangedEvent
+      this.subscription = this.contactService.listChangedEvent
       .subscribe(
         (contactsList: Contact[]) =>
         {

@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { NoticesComponent } from './notices/notices.component';
+import { NoticesDetailsComponent } from './notices/notices-details/notices-details.component';
+import { NoticesEditComponent } from './notices/notices-edit/notices-edit.component';
 
 import { VideosComponent } from './videos/videos.component';
 import { VideosDetailsComponent } from './videos/videos-details/videos-details.component';
@@ -23,9 +25,9 @@ const appRoutes: Routes = [
   {
     path: 'notices', component: NoticesComponent,    
     children: [
-      { path: 'new', component: NoticesComponent },
-      { path: ':id', component: NoticesComponent },
-      { path: ':id/edit', component: NoticesComponent },
+      { path: 'new', component: NoticesEditComponent },
+      { path: ':id', component: NoticesDetailsComponent },
+      { path: ':id/edit', component: NoticesEditComponent },
     ],
   },
   {

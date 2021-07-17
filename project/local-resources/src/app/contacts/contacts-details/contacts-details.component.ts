@@ -23,7 +23,7 @@ export class ContactsDetailsComponent implements OnInit {
         (params: Params) => {
           let foundID: string;
           foundID = params['id'];
-          let contactFound: Contact | null = this.contactService.getContact(foundID);
+          let contactFound: Contact | null = this.contactService.getItem(foundID);
           if (contactFound !== null)
             this.contact = contactFound;
         }
@@ -31,7 +31,7 @@ export class ContactsDetailsComponent implements OnInit {
   }
 
   onDelete() {
-    this.contactService.deleteContact(this.contact);
+    this.contactService.deleteItem(this.contact);
     this.router.navigate(['\contacts']);
   }
 

@@ -1,14 +1,13 @@
-import { AbstractDataService } from '../listable/abstract-data-service';
+import { AbstractDataServiceFromSeed } from '../listable/abstract-data-service-from-seed';
 import { Video } from './video.model';
 import { MOCKITEMS } from './MOCKITEMS';
-import { Subject } from 'rxjs';
 
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VideoService extends AbstractDataService<Video> {
+export class VideoService extends AbstractDataServiceFromSeed<Video> {
   seedData(): Video[] {
     return MOCKITEMS;
   }

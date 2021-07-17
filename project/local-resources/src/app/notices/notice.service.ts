@@ -1,15 +1,13 @@
-import { AbstractDataService } from '../listable/abstract-data-service';
+import { AbstractDataServiceFromSeed } from '../listable/abstract-data-service-from-seed';
 import { Notice } from './notice.model';
 import { MOCKITEMS } from './MOCKITEMS';
-import { Subject } from 'rxjs';
-
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class NoticeService extends AbstractDataService<Notice> {
+export class NoticeService extends AbstractDataServiceFromSeed<Notice> {
   seedData(): Notice[] {
     return MOCKITEMS;
   }

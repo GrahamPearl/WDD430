@@ -1,7 +1,7 @@
-<div class="card" style="width: 18rem;">    
+<div class="card" style="width: 16rem;" routerLinkActive="active-link" routerLink="{{video.id}}">
     <img src="http://img.youtube.com/vi/{{video.videoUrl}}/0.jpg" class="card-img-top" alt="...">
     <div class="card-body">
-        <h5 class="card-title">{{video.name}}</h5>                
+        <h5 class="card-title">{{video.name}}</h5>
     </div>
-    <a href="/videos" class="btn btn-primary">View</a>    
+    <a href="/videos/{{video.id}}" class="btn btn-primary">View</a>
 </div>
