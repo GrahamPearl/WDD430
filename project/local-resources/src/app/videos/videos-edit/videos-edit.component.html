@@ -1,1 +1,27 @@
-<p>videos-edit works!</p>
+<div class="panel-group">
+    <div class="panel panel-default">
+        <form id="contact-edit" (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <div class="panel-heading">                
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="http://img.youtube.com/vi/{{item.videoUrl}}/0.jpg" class="card-img-top" alt="...">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="name">Title</label>
+                            <textarea rows="5" cols="60" id="name" class="form-control required" size="120" max="120"
+                                name="name" required placeholder="Name:" [ngModel]=item?.name>
+                            </textarea>
+                            <input type="text" id="imageUrl" class="form-control" size="150" max="255" name="imageUrl" 
+                                placeholder="Image URL:" [ngModel]=item?.videoUrl>
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-3">
+                    <button class="btn btn-success" type="submit">Save</button>
+                    <button class="btn btn-primary" type="button" href='/videos'>Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

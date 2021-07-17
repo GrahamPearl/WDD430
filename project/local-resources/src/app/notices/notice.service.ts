@@ -1,16 +1,19 @@
-import { AbstractDataServiceFromSeed } from '../listable/abstract-data-service-from-seed';
 import { Notice } from './notice.model';
+import { EventEmitter,Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AbstractDataServiceFromHttp } from '../listable/abstract-data-service-from-http';
+
 import { MOCKITEMS } from './MOCKITEMS';
-import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class NoticeService extends AbstractDataServiceFromSeed<Notice> {
-  constructor() {
-    super();
-    super.setItems(MOCKITEMS);
+export class NoticeService extends AbstractDataServiceFromHttp<Notice> {
+  constructor(http: HttpClient) {
+    //super(http,'https://pearlgwdd430-default-rtdb.firebaseio.com/notices.json');
+    super(http,'http://localhost:3000/documents');    
+    //super.setItems(MOCKITEMS);
   }
 }
 

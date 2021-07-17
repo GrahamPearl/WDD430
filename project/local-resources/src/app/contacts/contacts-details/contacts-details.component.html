@@ -2,17 +2,10 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <div class="row">
-        <div class="col-md-7">
-          <h3>{{item.name}}</h3>
+        <div class="col-md-12">
           <img src="{{item.imageUrl}}">
-        </div>
-        <div class="col-md-5">
-          <div class="row">
-            <a class="btn btn-info" routerLink="edit">Edit</a>
-            <a class="btn btn-danger" (click)="onDelete()">Delete</a>
-          </div>
-        </div>
-      </div>
+          <h6>{{item.name}}</h6>          
+        </div>                        
     </div>
     <div class="panel-body">
       <div class="row">
@@ -24,5 +17,10 @@
         <p *ngIf="(item | json) != '{}'">{{item.phone}}</p>
       </div>
     </div>
+    <div class="row">
+      <a class="btn btn-secondary" routerLink="edit">Edit</a>
+      <a class="btn btn-danger" (click)="onDelete()">Delete</a>
+    </div>
+  </div>
   </div>
 </div>

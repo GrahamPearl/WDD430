@@ -14,7 +14,7 @@ import { VideoService } from '../video.service';
 
 export class VideosDetailsComponent extends AbstractDetailsComponent<Video> {
   redirect: string;
- 
+
   constructor(
     itemService: VideoService,
     router: Router,
@@ -26,7 +26,7 @@ export class VideosDetailsComponent extends AbstractDetailsComponent<Video> {
   }
 
   onView(): void {
-    let gotoUrl = 'https://www.youtube.com/embed/'+this.item.videoUrl;
+    let gotoUrl = 'https://www.youtube.com/embed/' + this.item.videoUrl;
     this.nativeWindow.open(gotoUrl);
   }
 }

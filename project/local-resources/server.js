@@ -11,9 +11,10 @@ var logger = require('morgan');
 
 var index = require('./server/routes/app');
 
-const contactRoutes = require('/server/routes/contacts');
-const noticeRoutes = require('/server/routes/notices');
-const reesourceRoutes = require('/server/routes/resources');
+const contactRoutes = require('./server/routes/contacts');
+const noticeRoutes = require('./server/routes/notices');
+const resourceRoutes = require('./server/routes/resources');
+const videoRoutes = require('./server/routes/videos');
 
 mongoose.connect('mongodb://localhost:27017/local-resources',
   { useNewUrlParser: true }, (err, res) => {
@@ -58,6 +59,7 @@ app.use('/', index);
 app.use('/contacts', contactRoutes);
 app.use('/notices', noticeRoutes);
 app.use('/resources', resourceRoutes);
+app.use('/videos', videoRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/local-resources/index.html'));

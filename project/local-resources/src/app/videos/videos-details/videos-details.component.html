@@ -1,5 +1,33 @@
 <section class="">
-  <h2>Video Browser</h2>
+  <div class="panel-group">
+    <div class="panel panel-default">
+        <form id="contact-edit">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="http://img.youtube.com/vi/{{item.videoUrl}}/0.jpg" class="card-img-top" alt="...">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="name">Title</label>
+                        <textarea rows="5" cols="60" id="name" class="form-control required" size="120" max="120"
+                            name="name" required placeholder="Name:" [ngModel]=item?.name readonly>
+                        </textarea>
+                        <input type="text" id="imageUrl" class="form-control" size="150" max="255" name="imageUrl"
+                            placeholder="Image URL:" [ngModel]=item?.videoUrl readonly>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                </div>
+                <div class="row col-md-3">
+                  <a class="btn btn-primary" (click)="onView()">View On YouTube</a>
+                  <a class="btn btn-secondary" routerLink="edit" >Edit</a>
+                  <a class="btn btn-danger"  (click)="onDelete()">Delete</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
   <!---
   <div class="row d-flex justify-content-center">
@@ -12,8 +40,6 @@
     </div>
     <a href="https://www.youtube.com/embed/{{item.videoUrl}}" class="btn btn-primary">View Video</a>
   -->
-  <h2>Title: {{item?.name}}</h2>
-  <a class="btn btn-primary" (click)="onView()">View Video</a>
-  <a class="btn btn-secondary" routerLink="edit" >Edit</a>
-  <a class="btn btn-danger"  (click)="onDelete()">Delete</a>
+  
+  
 </section>

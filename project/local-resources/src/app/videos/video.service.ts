@@ -1,16 +1,17 @@
-import { AbstractDataServiceFromSeed } from '../listable/abstract-data-service-from-seed';
+import { EventEmitter,Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AbstractDataServiceFromHttp } from '../listable/abstract-data-service-from-http';
+
 import { Video } from './video.model';
 import { MOCKITEMS } from './MOCKITEMS';
-
-import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VideoService extends AbstractDataServiceFromSeed<Video> {
+export class VideoService extends AbstractDataServiceFromHttp<Video> {
 
-  constructor() {
-    super();
-    super.setItems(MOCKITEMS);
+  constructor(http: HttpClient) {
+    super(http,'https://pearlgwdd430-default-rtdb.firebaseio.com/videos.json');
+    //super.setItems(MOCKITEMS);
   }
 }

@@ -1,5 +1,5 @@
 const sequenceGenerator = require('./sequenceGenerator');
-const Contact = require('../models/contact.js');
+const Contact = require('../models/contact');
 
 var express = require('express');
 var router = express.Router();
@@ -39,7 +39,7 @@ router.post('/', (req, res, next) => {
     contact.save()
         .then(createdContact => {
             res.status(201).json({
-                message: 'Message added successfully',
+                message: 'Contact added successfully',
                 document: createdContact
             });
         })
@@ -75,7 +75,7 @@ router.put('/:id', (req, res, next) => {
         })
         .catch(error => {
             res.status(500).json({
-                message: 'Message not found.',
+                message: 'Contact not found.',
                 error: { contact: 'Contact not found' }
             });
         });

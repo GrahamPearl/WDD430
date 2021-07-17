@@ -8,6 +8,6 @@ export class Notice extends Listable {
         public message: string,
         public type: string,
         public dateOf: string, 
-        public sender : Contact | null
+        public sender : Contact[] | null
       ) { super(id) };
 }

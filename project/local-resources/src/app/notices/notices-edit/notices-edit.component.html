@@ -1,1 +1,55 @@
-<p>notices-edit works!</p>
+<div class="panel panel-default">
+    <div class="panel-body">
+      <form id="notice-edit"  (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="row">
+          <div class="col-sm-12 form-group">            
+            <input type="text" id="title" class="form-control required" size="120" max="120" name="title"
+              required placeholder="Title:"
+              [ngModel]=item?.title
+            >
+                   
+            <input type="text" id="message" class="form-control required" size="120" max="255" name="message" 
+              required placeholder="Message:"
+              [ngModel]=item?.message
+            >
+            <!---
+            <input type="text" id="type" class="form-control required" size="120" max="255" name="type" 
+              required placeholder="Type:"
+              [ngModel]=item?.type
+            >
+
+
+            <mat-form-field>
+              <mat-select placeholder="Select notice type">
+                <ng-container *ngFor="let item of (noticeTypes$ | async)"></ng-container>
+                <mat-option [value]="item.id">
+                  {{item.text}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            -->
+                        
+            <select [(ngModel)] = "item.type" (ngModelChange)="onNoticeTypeSelected($event)" 
+              class="form-select" aria-label="Default select example">              
+              <option *ngFor="let item of noticeTypes" value="item.id">{{item?.text}} </option>
+            </select>
+
+            {{item.type}}
+          
+          </div>
+        </div>
+                  
+        <div class="row">
+          <div class="col-xs-12 btn-toolbar">
+            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-primary" type="button">Cancel</button>
+          </div>
+        </div>
+
+        <div>
+          <app-contacts-list></app-contacts-list>  
+        </div>
+  
+      </form>
+    </div>
+  </div>

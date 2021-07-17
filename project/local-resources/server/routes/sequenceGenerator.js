@@ -17,9 +17,11 @@ function SequenceGenerator() {
       }
 
       sequenceId = sequence._id;
-      maxDocumentId = sequence.maxDocumentId;
-      maxMessageId = sequence.maxMessageId;
       maxContactId = sequence.maxContactId;
+      maxNoticeId = sequence.maxNoticeId;
+      maxResourcesId = sequence.maxResourcesId;
+      maxVideosId = sequence.maxVideosId;
+      
     });
 }
 
@@ -29,21 +31,26 @@ SequenceGenerator.prototype.nextId = function(collectionType) {
   var nextId;
 
   switch (collectionType) {
-    case 'documents':
-      maxDocumentId++;
-      updateObject = {maxDocumentId: maxDocumentId};
-      nextId = maxDocumentId;
-      break;
-    case 'messages':
-      maxMessageId++;
-      updateObject = {maxMessageId: maxMessageId};
-      nextId = maxMessageId;
-      break;
     case 'contacts':
       maxContactId++;
       updateObject = {maxContactId: maxContactId};
-      nextId = maxContactId;
+      nextId = maxDocumentId;
       break;
+    case 'notices':
+      maxNoticeId++;
+      updateObject = {maxNoticeId: maxNoticeId};
+      nextId = maxMessageId;
+      break;
+    case 'resources':
+      maxResourcesId++;
+      updateObject = {maxResourcesId: maxResourcesId};
+      nextId = maxResourcesId;
+      break;
+      case 'videos':
+        maxVideosId++;
+        updateObject = {maxVideosId: maxVideosId};
+        nextId = maxVideosId;
+        break;      
     default:
       return -1;
   }

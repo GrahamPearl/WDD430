@@ -30,7 +30,7 @@ export abstract class AbstractDataServiceFromHttp<T extends Listable> extends Ab
     );
   }
 
-  public storeContacts(items: T[]) {
+  public storeItems(items: T[]) {
 
     let data = JSON.stringify(super.getItems());
     let httpHeader: HttpHeaders = new HttpHeaders();
@@ -42,6 +42,5 @@ export abstract class AbstractDataServiceFromHttp<T extends Listable> extends Ab
         this.listChangedEvent.next(itemsListClone);
       }
       );
-  }
-
+  }  
 }

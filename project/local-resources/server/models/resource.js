@@ -2,9 +2,10 @@ const mongoose = require('mongoose');
 
 const resourceSchema = mongoose.Schema({
     id: { type: String, required: true },
-    name: { type: String },
-    url: { type: String },    
-    children:  [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document' }]
+    title: { type: String },
+    product: { type: String },    
+    keywords:  [{ type: String }],
+    dateOf: { type: String }    
 });
 
 module.exports = mongoose.model('Resource', resourceSchema);

@@ -23,9 +23,7 @@ export const MOCKITEMS: Video[] = [
     id: '4',
     name: 'President Russell M. Nelson on the Healing Power of Gratitude​',
     videoUrl: 'i51gcWCs-Ho',    
-  }
-  
+  }  
   // index 4
-  
 ];
 //

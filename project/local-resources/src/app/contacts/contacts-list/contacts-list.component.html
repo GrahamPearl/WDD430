@@ -7,7 +7,7 @@
           <div class="panel-heading">
             <div class="row">
               <span class="title pad-left-right">
-                <h2>Contacts</h2>
+                <h2>Contact List</h2>
               </span>
             </div>
             <div class="pull-right pad-left-right">
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div class="panel-body">
+    <div class="card-group col-md-10">
       <app-contacts-item *ngFor="let item of contacts | ContactsFilterPipe:term" [item]="item" dnd-draggable
         [dragEnabled]="true" [dragData]="item" [dropZones]="['contactGroup']">
       </app-contacts-item>

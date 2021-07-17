@@ -49,8 +49,7 @@ const appRoutes: Routes = [
     path: 'videos', component: VideosComponent,
     children: [
       { path: 'new', component: VideosEditComponent },
-      { path: ':id', component: VideosDetailsComponent },
-      { path: ':id/new', component: VideosEditComponent },
+      { path: ':id', component: VideosDetailsComponent },      
       { path: ':id/edit', component: VideosEditComponent },
     ],
   },

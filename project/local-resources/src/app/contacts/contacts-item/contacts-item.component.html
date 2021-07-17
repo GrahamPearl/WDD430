@@ -1,13 +1,8 @@
-<a class="list-group-item clearfix documentDiv">
-    <div class="row">
-      
-      Contact:
-      <div class="col-md-9">
-        <h4>{{item.name}}</h4> 
-      </div>
-      <div class="col-md-3">
-        <img src="{{item.imageUrl}}">
-      </div>
+<div class="card" style="width: 8rem;" routerLinkActive="active-link" routerLink="{{item.id}}">
   
-    </div>
-  </a>
+  <img *ngIf="(item.imageUrl) != ''" src="{{item.imageUrl}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h6 class="card-title text-center">{{item.name}}</h6>
+    <p class="card-text text-center">{{item.phone}}</p>
+  </div>  
+</div>
