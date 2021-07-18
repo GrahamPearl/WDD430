@@ -11,14 +11,9 @@ import { MOCKITEMS } from './MOCKITEMS';
 
 export class NoticeService extends AbstractDataServiceFromHttp<Notice> {
   constructor(http: HttpClient) {
-    
-    super(http,'http://localhost:3000/notices');    
-    http.get<{ message: string; data: Notice[] }>('http://localhost:3000/notices').subscribe(response => {
-      console.log(response.message);
-      this.setItems(response.data);
-    });
+    //super(http,'https://pearlgwdd430-default-rtdb.firebaseio.com/notices.json');
+    super(http,'http://localhost:3000/documents');    
+    //super.setItems(MOCKITEMS);
   }
-
-  
 }
 

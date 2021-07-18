@@ -5,6 +5,8 @@ var express = require('express');
 var router = express.Router();
 module.exports = router;
 
+console.log('-- Contacts --');
+
 router.get('/', (req, res, next) => {
     //call the Contact model find() method to get all ... in the collection
     Contact.find({})
@@ -13,7 +15,7 @@ router.get('/', (req, res, next) => {
         .then(contact => {
             res.status(200).json({
                 message: 'Contacts fetched successfully!',
-                contacts: contacts
+                data: contacts
               });
           })
         .catch(error => {
@@ -40,7 +42,7 @@ router.post('/', (req, res, next) => {
         .then(createdContact => {
             res.status(201).json({
                 message: 'Contact added successfully',
-                document: createdContact
+                data: createdContact
             });
         })
         .catch(error => {

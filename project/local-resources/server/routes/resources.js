@@ -5,12 +5,14 @@ var express = require('express');
 var router = express.Router();
 module.exports = router;
 
+console.log('-- Resources --');
+
 router.get('/', (req, res, next) => {
     Resources.find()
         .then(resources => {
             res.status(200).json({
                 message: 'Resources fetched successfully!',
-                resources: resources
+                data: resources
             });
         })
         .catch(error => {
@@ -36,7 +38,7 @@ router.post('/', (req, res, next) => {
         .then(createdItem => {
             res.status(201).json({
                 message: 'Resources added successfully',
-                resources: createdItem
+                data: createdItem
             });
         })
         .catch(error => {

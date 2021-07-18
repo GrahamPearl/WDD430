@@ -54,12 +54,12 @@ app.use((req, res, next) => {
 
 // root directory for your web site
 // app.use(express.static(path.join(__dirname, 'dist/')));
-
+console.log('Applying routing structure of website... ');
 app.use('/', index);
-app.use('/contacts', contactRoutes);
-app.use('/notices', noticeRoutes);
-app.use('/resources', resourceRoutes);
-app.use('/videos', videoRoutes);
+app.use('/contacts', contactRoutes);   console.log('/contacts... ');
+app.use('/notices', noticeRoutes);     console.log('/notices... ');
+app.use('/resources', resourceRoutes); console.log('/resources... ');
+app.use('/videos', videoRoutes);       console.log('/videos... ');
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/local-resources/index.html'));
@@ -73,3 +73,4 @@ const server = http.createServer(app);
 server.listen(port, function () {
   console.log('API running on localhost: ' + port)
 });
+console.log('All processes are acticely listening');

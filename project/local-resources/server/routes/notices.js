@@ -5,12 +5,14 @@ var express = require('express');
 var router = express.Router();
 module.exports = router;
 
+console.log('-- Notices --');
+
 router.get('/', (req, res, next) => {
     Notice.find()
         .then(notices => {
             res.status(200).json({
                 message: 'Notices fetched successfully!',
-                notices: notices
+                data: notices
             });
         })
         .catch(error => {
@@ -35,7 +37,7 @@ router.post('/', (req, res, next) => {
         .then(createdDocument => {
             res.status(201).json({
                 message: 'Notice added successfully',
-                Notice: createdDocument
+                data: createdDocument
             });
         })
         .catch(error => {

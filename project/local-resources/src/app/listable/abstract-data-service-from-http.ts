@@ -15,19 +15,21 @@ export abstract class AbstractDataServiceFromHttp<T extends Listable> extends Ab
     this.http = http;
     this.url = url;
 
-    http.get<T[]>(url).subscribe(
+    if (url.length > 0) {
+      http.get<T[]>(url).subscribe(
 
-      (items: T[]) => {
-        super.setItems(items);        
+        (items: T[]) => {
+          super.setItems(items);
 
-        let itemsListClone = super.getItems().slice();
-        this.itemChangedEvent.next(itemsListClone);
-      }
-      ,
-      (error: any) => {
-        console.log(error);
-      }
-    );
+          let itemsListClone = super.getItems().slice();
+          this.itemChangedEvent.next(itemsListClone);
+        }
+        ,
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   public storeItems(items: T[]) {
@@ -42,5 +44,5 @@ export abstract class AbstractDataServiceFromHttp<T extends Listable> extends Ab
         this.listChangedEvent.next(itemsListClone);
       }
       );
-  }  
+  }
 }

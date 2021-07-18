@@ -10,8 +10,11 @@ import { MOCKITEMS } from './MOCKITEMS';
 })
 export class VideoService extends AbstractDataServiceFromHttp<Video> {
 
-  constructor(http: HttpClient) {
-    super(http,'https://pearlgwdd430-default-rtdb.firebaseio.com/videos.json');
-    //super.setItems(MOCKITEMS);
+  constructor(http: HttpClient) {    
+    super(http,'http://localhost:3000/videos');    
+    http.get<{ message: string; data: Video[] }>('http://localhost:3000/videos').subscribe(response => {
+      console.log(response.message);
+      this.setItems(response.data);
+    });
   }
 }
